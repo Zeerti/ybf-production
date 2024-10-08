@@ -27,14 +27,35 @@ const structureToolOptions = {
               ]),
           ),
         S.listItem()
-          .title('Lunch Special Page')
+          .title('Lunch Specials Page')
           .child(
             S.list()
-              .title('Lunch Special')
+              .title('Lunch Special Options')
               .items([
-                S.documentTypeListItem('coldCuts').title('Cold Cuts'),
-                S.documentTypeListItem('cheese').title('Cheeses'),
-                S.documentTypeListItem('deliSalad').title('Deli Salads'),
+                S.listItem()
+                  .title('Condiments')
+                  .child(S.documentTypeList('condiment').title('Condiments')),
+                S.listItem()
+                  .title('Sandwiches')
+                  .child(S.documentTypeList('sandwich').title('Sandwiches')),
+                S.listItem()
+                  .title('Meat Choices')
+                  .child(S.documentTypeList('sandwichMeat').title('Meat Options')),
+                S.listItem()
+                  .title('Cheese Choices')
+                  .child(S.documentTypeList('sandwichCheese').title('Cheese Options')),
+                S.listItem()
+                  .title('Daily and Weekly Lunch Specials')
+                  .child(
+                    S.documentTypeList('lunchSpecialBanner').title(
+                      'Lunch Daily and Weekly Specials',
+                    ),
+                  ),
+                S.listItem()
+                  .title('Bottom Floating Banner')
+                  .child(
+                    S.documentTypeList('lunchSpecialBottomBanner').title('Floating Bottom Banner'),
+                  ),
               ]),
           ),
         S.listItem()
