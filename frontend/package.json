@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" \"pnpm tailwind:watch\"",
+    "tailwind:watch": "tailwindcss -i ./app/globals.css -o ./app/output.css --watch",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -19,6 +20,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "concurrently": "^9.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "postcss": "^8",

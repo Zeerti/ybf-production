@@ -76,8 +76,6 @@ export const franksOriginalBundlesType = defineType({
       type: 'image',
       title: 'Bundle Image',
       description: 'Sets the image displayed at the top of the bundle card',
-      validation: (rule) =>
-        rule.required().error('You must set an image to be displayed for the bundle'),
     }),
     defineField({
       name: 'bundleItems',
@@ -90,11 +88,6 @@ export const franksOriginalBundlesType = defineType({
           // Check if the array is empty
           if (!items || items.length === 0) {
             return 'You must add at least one item to the bundle'
-          }
-
-          for (const item in items) {
-            if (item.length <= 3)
-              return 'One of your items has 3 or fewer characters. Please add text or delete the item.'
           }
 
           return true

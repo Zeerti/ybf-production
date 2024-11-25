@@ -3,7 +3,7 @@ import {defineField, defineType} from 'sanity'
 export const specialtyMeatType = defineType({
   name: 'specialtyMeat',
   type: 'document',
-  title: 'All Cold Cuts',
+  title: 'Specialty Meat',
   fields: [
     defineField({
       name: 'name',
@@ -21,6 +21,10 @@ export const specialtyMeatType = defineType({
         list: [
           {title: 'Lamb', value: 'lamb'},
           {title: 'Veal', value: 'veal'},
+          {title: 'Pork', value: 'pork'},
+          {title: 'Beef', value: 'beef'},
+          {title: 'Chicken', value: 'chicken'},
+          {title: 'Other', value: 'other'},
         ],
         layout: 'radio',
       },

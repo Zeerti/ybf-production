@@ -1,6 +1,5 @@
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
 const structureToolOptions = {
@@ -33,23 +32,51 @@ const structureToolOptions = {
               .title('Lunch Special Options')
               .items([
                 S.listItem()
-                  .title('Condiments')
-                  .child(S.documentTypeList('condiment').title('Condiments')),
-                S.listItem()
-                  .title('Sandwiches')
-                  .child(S.documentTypeList('sandwich').title('Sandwiches')),
-                S.listItem()
-                  .title('Meat Choices')
-                  .child(S.documentTypeList('sandwichMeat').title('Meat Options')),
-                S.listItem()
-                  .title('Cheese Choices')
-                  .child(S.documentTypeList('sandwichCheese').title('Cheese Options')),
-                S.listItem()
-                  .title('Daily and Weekly Lunch Specials')
+                  .title('Sandwich Prices')
                   .child(
-                    S.documentTypeList('lunchSpecialBanner').title(
-                      'Lunch Daily and Weekly Specials',
-                    ),
+                    S.editor()
+                      .id('sandwichPrices')
+                      .schemaType('sandwichPrices')
+                      .documentId('sandwichPrices'),
+                  )
+                  .icon(() => '💰'),
+                S.listItem()
+                  .title('Sandwich Management')
+                  .child(
+                    S.list()
+                      .title('Sandwich Management')
+                      .items([
+                        S.documentTypeListItem('sandwich').title('Named Sandwiches'),
+                        S.documentTypeListItem('condiment').title('Condiments'),
+                        S.documentTypeListItem('sandwichMeat').title('Meat Options'),
+                        S.documentTypeListItem('sandwichCheese').title('Cheese Options'),
+                      ]),
+                  ),
+                S.listItem()
+                  .title('Daily & Weekly Specials')
+                  .child(
+                    S.list()
+                      .title('Specials')
+                      .items([
+                        S.listItem()
+                          .title('Soup of the Day')
+                          .child(
+                            S.editor()
+                              .id('dailySpecial')
+                              .schemaType('dailySpecial')
+                              .documentId('dailySpecial'),
+                          )
+                          .icon(() => '🍜'),
+                        S.listItem()
+                          .title('Weekly Special')
+                          .child(
+                            S.editor()
+                              .id('weeklySpecial')
+                              .schemaType('weeklySpecial')
+                              .documentId('weeklySpecial'),
+                          )
+                          .icon(() => '🌟'),
+                      ]),
                   ),
                 S.listItem()
                   .title('Bottom Floating Banner')
@@ -90,9 +117,9 @@ export default defineConfig({
   title: 'ybf_production',
 
   projectId: 'che1sfre',
-  dataset: 'development',
+  dataset: 'production',
 
-  plugins: [structureTool(structureToolOptions), visionTool()],
+  plugins: [structureTool(structureToolOptions)],
 
   schema: {
     types: schemaTypes,

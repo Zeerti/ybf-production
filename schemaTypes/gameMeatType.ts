@@ -23,6 +23,7 @@ export const gameMeatType = defineType({
           {title: 'Venison', value: 'venison'},
           {title: 'Buffalo', value: 'buffalo'},
           {title: 'Elk', value: 'elk'},
+          {title: 'Other', value: 'other'},
         ],
         layout: 'radio',
       },
@@ -54,15 +55,6 @@ export const gameMeatType = defineType({
       type: 'text',
       title: 'Product Description',
       description: 'Provide a brief description of the game meat product',
-    }),
-    defineField({
-      name: 'image',
-      type: 'image',
-      title: 'Product Image',
-      description: 'Upload an image of the game meat product',
-      options: {
-        hotspot: true,
-      },
     }),
   ],
   preview: {

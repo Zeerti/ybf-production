@@ -74,18 +74,66 @@ export type Slug = {
   source?: string
 }
 
-export type GameMeat = {
+export type Sandwich = {
   _id: string
-  _type: 'gameMeat'
+  _type: 'sandwich'
   _createdAt: string
   _updatedAt: string
   _rev: string
   name?: string
-  section?: 'gameBirds' | 'venison' | 'buffalo' | 'elk'
-  price?: number
-  priceUnit?: 'perPound' | 'perPackage'
+  availableBreads?: Array<'white' | 'wheat' | 'rye'>
+  ingredients?: Array<string>
   description?: string
-  image?: {
+}
+
+export type SandwichPrices = {
+  _id: string
+  _type: 'sandwichPrices'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  fourInchPrice?: number
+  sixInchPrice?: number
+  eightInchPrice?: number
+  halfRyePrice?: number
+  wholeRyePrice?: number
+}
+
+export type SandwichMeat = {
+  _id: string
+  _type: 'sandwichMeat'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+}
+
+export type SandwichCheese = {
+  _id: string
+  _type: 'sandwichCheese'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+}
+
+export type LunchSpecialBottomBanner = {
+  _id: string
+  _type: 'lunchSpecialBottomBanner'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  header?: string
+  subheader?: string
+}
+
+export type WeeklySpecial = {
+  _id: string
+  _type: 'weeklySpecial'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  photo?: {
     asset?: {
       _ref: string
       _type: 'reference'
@@ -96,6 +144,51 @@ export type GameMeat = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  name?: string
+  description?: string
+}
+
+export type DailySpecial = {
+  _id: string
+  _type: 'dailySpecial'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  photo?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  name?: string
+  description?: string
+}
+
+export type Condiment = {
+  _id: string
+  _type: 'condiment'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+}
+
+export type GameMeat = {
+  _id: string
+  _type: 'gameMeat'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  name?: string
+  section?: 'gameBirds' | 'venison' | 'buffalo' | 'elk' | 'other'
+  price?: number
+  priceUnit?: 'perPound' | 'perPackage'
+  description?: string
 }
 
 export type SpecialtyMeat = {
@@ -105,7 +198,7 @@ export type SpecialtyMeat = {
   _updatedAt: string
   _rev: string
   name?: string
-  section?: 'lamb' | 'veal'
+  section?: 'lamb' | 'veal' | 'pork' | 'beef' | 'chicken' | 'other'
   price?: number
   priceUnit?: 'perPound' | 'perPackage' | 'perItem'
   description?: string
@@ -275,6 +368,14 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | Geopoint
   | Slug
+  | Sandwich
+  | SandwichPrices
+  | SandwichMeat
+  | SandwichCheese
+  | LunchSpecialBottomBanner
+  | WeeklySpecial
+  | DailySpecial
+  | Condiment
   | GameMeat
   | SpecialtyMeat
   | LandingPageCard
@@ -289,33 +390,3 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageMetadata
 export declare const internalGroqTypeReferenceTo: unique symbol
-// Source: ./frontend/src/app/page.tsx
-// Variable: FO_BUNDLES_QUERY
-// Query: *[  _type == "foBundle"]{_id, name, weight, price, image, bundleItems}|order(price desc)
-export type FO_BUNDLES_QUERYResult = Array<never>
-// Variable: COLDCUTS_QUERY
-// Query: *[  _type == "coldCuts"]{_id, name, price}|order(name desc)
-export type COLDCUTS_QUERYResult = Array<{
-  _id: string
-  name: string | null
-  price: number | null
-}>
-// Variable: BUNDLES_QUERY
-// Query: *[  _type == "bundle"]{_id, weight, price, image, bundleItems}|order(price desc)
-export type BUNDLES_QUERYResult = Array<{
-  _id: string
-  weight: number | null
-  price: number | null
-  image: null
-  bundleItems: Array<string> | null
-}>
-
-// Query TypeMap
-import '@sanity/client'
-declare module '@sanity/client' {
-  interface SanityQueries {
-    '*[\n  _type == "foBundle"\n]{_id, name, weight, price, image, bundleItems}|order(price desc)': FO_BUNDLES_QUERYResult
-    '*[\n  _type == "coldCuts"\n]{_id, name, price}|order(name desc)': COLDCUTS_QUERYResult
-    '*[\n  _type == "bundle"\n]{_id, weight, price, image, bundleItems}|order(price desc)': BUNDLES_QUERYResult
-  }
-}
