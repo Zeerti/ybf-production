@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 interface DailySpecialProps {
   dailySpecial: {
-    name: string
+    name?: string
     description?: string
     photo?: {
       asset?: {

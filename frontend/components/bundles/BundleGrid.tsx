@@ -29,9 +29,9 @@ export const BundleGrid = () => {
               <BundleCard
                 key={bundle._id}
                 title={bundle.name || ''}
-                price={bundle.price}
-                items={bundle.bundleItems}
-                imageUrl={bundle.imageUrl}
+                price={bundle.price ?? 0}
+                items={bundle.bundleItems ?? []}
+                imageUrl={bundle?.imageUrl}
               />
             ))}
           </div>
@@ -47,8 +47,8 @@ export const BundleGrid = () => {
               <BundleCard
                 key={bundle._id}
                 title={`${bundle.weight}lb Bundle`}
-                price={bundle.price}
-                items={bundle.bundleItems}
+                price={bundle.price ?? 0}
+                items={bundle.bundleItems ?? []}
               />
             ))}
           </div>

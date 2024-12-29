@@ -5,9 +5,9 @@ import {LunchMenuContent} from '../../components/lunch/LunchMenuContent'
 import {DailySpecialsFooter} from '@/components/lunch/DailySpecialsFooter'
 import {WeeklySpecial} from '@/components/lunch/WeeklySpecial'
 import {DailySpecial} from '@/components/lunch/DailySpecial'
-import {Condiments} from '@/components/lunch/Condiments'
 import {getLunchMenuData} from '../../lib/sanity'
 import type {LunchMenuData} from '../../lib/sanity'
+import {projectId, dataset} from '@/lib/sanity'
 
 export const metadata: Metadata = {
   title: 'Lunch Menu',
@@ -16,7 +16,6 @@ export const metadata: Metadata = {
 
 export default async function LunchPage(): Promise<JSX.Element> {
   const data: LunchMenuData = await getLunchMenuData()
-  console.info(data)
 
   return (
     <main className="flex-grow pb-24">
@@ -39,7 +38,24 @@ export default async function LunchPage(): Promise<JSX.Element> {
           </div>
 
           <div className="lg:w-80 space-y-8">
-            <DailySpecial dailySpecial={data.dailySpecial} />
+            {data.dailySpecial && data.dailySpecial.name && (
+              <DailySpecial
+                dailySpecial={{
+                  ...data.dailySpecial,
+                  photo: data.dailySpecial.photo
+                    ? {
+                        asset: {
+                          url: data.dailySpecial?.photo?.asset?._ref
+                            ? `https://cdn.sanity.io/images/${projectId}/${dataset}/${data.dailySpecial.photo.asset._ref
+                                .replace('image-', '')
+                                .replace('-jpg', '.jpg')}`
+                            : undefined,
+                        },
+                      }
+                    : undefined,
+                }}
+              />
+            )}
             <WeeklySpecial weeklySpecial={data.weeklySpecial} />
           </div>
         </div>

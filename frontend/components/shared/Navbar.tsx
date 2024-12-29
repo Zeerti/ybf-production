@@ -6,6 +6,7 @@ export const Navbar = () => {
           <a href="/" className="text-xl font-bold">
             Your Butcher Frank
           </a>
+
           <div className="space-x-4">
             <a href="/bundles" className="hover:text-red-600">
               Bundles
@@ -18,6 +19,9 @@ export const Navbar = () => {
             </a>
             <a href="/lunch" className="hover:text-red-600">
               Lunch Special
+            </a>
+            <a href="/" className=" hover:text-red-600 font-bold">
+              (303) 772-3281
             </a>
           </div>
         </div>

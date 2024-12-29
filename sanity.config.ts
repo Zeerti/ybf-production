@@ -8,11 +8,21 @@ const structureToolOptions = {
       .title('Web Pages')
       .items([
         S.listItem()
-          .title('Landing Page')
+          .title('Home Page')
           .child(
             S.list()
-              .title('Landing Items')
-              .items([S.documentTypeListItem('landingPageCard').title('Landing Page Cards')]),
+              .title('Home Page Items')
+              .items([
+                S.documentTypeListItem('homePageNavCard').title('Navigation Cards'),
+                S.documentTypeListItem('homePageInfoCard')
+                  .title('Info Cards')
+                  .child(
+                    S.documentList()
+                      .title('Info Cards')
+                      .filter('_type == "homePageInfoCard"')
+                      .defaultOrdering([{field: 'isSeasonalNotification', direction: 'desc'}]),
+                  ),
+              ]),
           ),
         S.listItem()
           .title('Deli Foods Page')

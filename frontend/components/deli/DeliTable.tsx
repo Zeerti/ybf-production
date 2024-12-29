@@ -104,7 +104,7 @@ export const DeliTable = () => {
                         {meat.name}
                       </td>
                       <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-brand-600 font-medium text-right">
-                        {formatPrice(meat.price, meat.priceUnit)}
+                        {formatPrice(meat.price || 0, meat.priceUnit || '')}
                       </td>
                     </tr>
                   ))}
@@ -138,7 +138,7 @@ export const DeliTable = () => {
                         {cheese.name}
                       </td>
                       <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-brand-600 font-medium text-right">
-                        {formatPrice(cheese.price, cheese.priceUnit)}
+                        {formatPrice(cheese.price || 0, cheese.priceUnit || '')}
                       </td>
                     </tr>
                   ))}
@@ -172,7 +172,7 @@ export const DeliTable = () => {
                         {salad.name}
                       </td>
                       <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-brand-600 font-medium text-right">
-                        {formatPrice(salad.price, salad.priceUnit)}
+                        {formatPrice(salad.price || 0, salad.priceUnit || '')}
                       </td>
                     </tr>
                   ))}

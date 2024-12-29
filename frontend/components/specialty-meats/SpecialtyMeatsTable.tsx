@@ -58,7 +58,7 @@ const MeatTable = ({items, section, searchTerm}: MeatTableProps) => {
       </div>
       <div className="max-h-[400px] overflow-y-auto">
         <table className="min-w-full divide-y divide-surface-200">
-          <thead className="bg-brand-50 sticky top-0">
+          <thead className="sticky top-0">
             <tr>
               <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-brand-700 uppercase tracking-wider">
                 Cut
@@ -75,7 +75,7 @@ const MeatTable = ({items, section, searchTerm}: MeatTableProps) => {
                   {item.name}
                 </td>
                 <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-brand-600 font-medium text-right">
-                  {formatPrice(item.price, item.priceUnit)}
+                  {formatPrice(item.price || 0, item.priceUnit || '')}
                 </td>
               </tr>
             ))}
@@ -115,7 +115,7 @@ export const SpecialtyMeatsTable = () => {
       acc[section].push(meat)
       return acc
     },
-    {} as {[key: string]: SpecialtyMeat[]},
+    {} as {[key: string]: (SpecialtyMeat | GameMeat)[]},
   )
 
   const gameSections = gameMeats.reduce(

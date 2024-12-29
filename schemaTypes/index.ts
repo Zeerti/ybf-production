@@ -1,6 +1,7 @@
 import {bundleType} from './bundleType'
 import {coldCutsType} from './coldCutsType'
-import {landingPageCardType} from './landingPageCardType'
+import {homePageNavCardType} from './homePageNavCardType'
+import {homePageInfoCardType} from './homePageInfoCardType'
 import {franksOriginalBundlesType} from './franksOriginalBundleType'
 import {cheeseType} from './cheeseType'
 import {deliSaladType} from './deliSaladType'
@@ -21,7 +22,8 @@ export const schemaTypes = [
   coldCutsType,
   cheeseType,
   deliSaladType,
-  landingPageCardType,
+  homePageNavCardType,
+  homePageInfoCardType,
   specialtyMeatType,
   gameMeatType,
   condimentType,

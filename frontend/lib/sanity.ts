@@ -5,6 +5,7 @@ import type {FranksOriginalBundle, Bundle, DailySpecial} from '../types/sanity/t
 import type {SanityImageSource} from '@sanity/image-url/lib/types/types'
 import type {ColdCuts, Cheese, DeliSalad} from '../types/sanity/types'
 import type {SpecialtyMeat, GameMeat} from '../types/sanity/types'
+import type {HomePageNavCard} from '../types/sanity/types'
 import type {
   Sandwich,
   SandwichPrices,
@@ -15,9 +16,12 @@ import type {
   Condiment,
 } from '../types/sanity/types'
 
+export const projectId = 'che1sfre'
+export const dataset = 'production'
+
 export const client = createClient({
-  projectId: 'che1sfre',
-  dataset: 'production',
+  projectId,
+  dataset,
   apiVersion: '2024-03-05',
   useCdn: true,
 })
@@ -149,6 +153,44 @@ export async function getGameMeats(): Promise<GameMeat[]> {
       description
     }
   `)
+}
+
+export async function getHomePageNavCards(): Promise<HomePageNavCard[]> {
+  const query = `*[_type == "homePageNavCard"] {
+    _id,
+    title,
+    subtitle,
+    navigationLink,
+    image {
+      asset->,
+      hotspot,
+      crop
+    }
+  } | order(_createdAt asc)`
+
+  return await client.fetch(query)
+}
+
+export async function getHomePageInfoCard() {
+  const query = `*[_type == "homePageInfoCard" && !isSeasonalNotification] {
+    _id,
+    title,
+    subtitle,
+    content
+  }[0]`
+  
+  return await client.fetch(query)
+}
+
+export async function getSeasonalNotification() {
+  const query = `*[_type == "homePageInfoCard" && isSeasonalNotification] {
+    _id,
+    title,
+    subtitle,
+    content
+  }[0]`
+  
+  return await client.fetch(query)
 }
 
 export type LunchMenuData = {
