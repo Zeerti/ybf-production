@@ -11,7 +11,7 @@ export default function SpecialtyPage() {
     <main className="flex-grow">
       <HeroBanner
         title="Specialty Meats"
-        description="Discover our premium and rare meat selections"
+        subtitle="Discover our premium and rare meat selections"
         imagePath="/images/specialty-hero.jpg"
       />
       <SpecialtyMeatsTable />

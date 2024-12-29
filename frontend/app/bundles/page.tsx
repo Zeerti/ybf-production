@@ -11,7 +11,7 @@ export default function BundlesPage() {
     <main className="flex-grow">
       <HeroBanner
         title="Meat Bundles"
-        description="Save big with our carefully curated meat bundles"
+        subtitle="Save big with our carefully curated meat bundles"
         imagePath="/images/bundles-hero.jpg"
       />
       <BundleGrid />

@@ -21,7 +21,7 @@ export default async function LunchPage(): Promise<JSX.Element> {
     <main className="flex-grow pb-24">
       <HeroBanner
         title="Lunch Menu"
-        description="Fresh made sandwiches and daily specials"
+        subtitle="Fresh made sandwiches and daily specials"
         imagePath="/images/lunch-hero.jpg"
       />
 

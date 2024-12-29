@@ -13,7 +13,7 @@ export default function DeliPage() {
     <main className="flex-grow">
       <HeroBanner
         title="Deli & Cheese"
-        description="Premium deli meats and artisanal cheeses"
+        subtitle="Premium deli meats and artisanal cheeses"
         imagePath="/images/deli-hero.jpg"
       />
       <DeliTable />
