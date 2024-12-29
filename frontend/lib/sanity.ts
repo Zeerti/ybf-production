@@ -178,7 +178,7 @@ export async function getHomePageInfoCard() {
     subtitle,
     content
   }[0]`
-  
+
   return await client.fetch(query)
 }
 
@@ -189,7 +189,7 @@ export async function getSeasonalNotification() {
     subtitle,
     content
   }[0]`
-  
+
   return await client.fetch(query)
 }
 

@@ -331,6 +331,7 @@ export type FranksOriginalBundle = {
     _type: 'image'
   }
   bundleItems?: Array<string>
+  imageUrl?: string
 }
 
 export type SanityImageCrop = {

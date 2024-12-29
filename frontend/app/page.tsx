@@ -6,16 +6,16 @@ import {InfoCard} from '@/components/home/InfoCard'
 import {SeasonalNotification} from '@/components/home/SeasonalNotification'
 import {getHomePageNavCards, getHomePageInfoCard, getSeasonalNotification} from '@/lib/sanity'
 import {useState, useEffect} from 'react'
-import type {HomePageInfoCard as HomePageInfoCardType} from '@/types/sanity/types'
+import type {HomePageInfoCard as HomePageInfoCardType, HomePageNavCard} from '@/types/sanity/types'
 import FindUsCard from '@/components/home/FindUsCard'
 
 export default function HomePage() {
-  const [navigationCards, setNavigationCards] = useState([])
-  const [infoCard, setInfoCard] = useState(null)
+  const [navigationCards, setNavigationCards] = useState<HomePageNavCard[]>([])
+  const [infoCard, setInfoCard] = useState<HomePageInfoCardType | null>(null)
   const [seasonalNotification, setSeasonalNotification] = useState<HomePageInfoCardType | null>(
     null,
   )
-  const [showNotification, setShowNotification] = useState(false)
+  const [showNotification, setShowNotification] = useState<boolean>(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -48,7 +48,7 @@ export default function HomePage() {
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-surface-800">
           Serving the Longmont area since 1980
         </h2>
-        <h4 className='text-center mb-8 text-surface-800"'>
+        <h4 className="text-center mb-8 text-surface-800">
           A locally owned business, <span className="font-bold">Patrick Martien</span> and{' '}
           <span className="font-bold">Ron Lamb</span> plus their friendly staff are ready and
           willing to help each customer with one on one service.
@@ -60,7 +60,6 @@ export default function HomePage() {
       <section className="container mx-auto px-4 pb-8 sm:pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <FindUsCard />
-
           <InfoCard card={infoCard} />
         </div>
       </section>

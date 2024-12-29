@@ -7,10 +7,7 @@ interface SeasonalNotificationProps {
   onClose: () => void
 }
 
-export function SeasonalNotification({
-  notification,
-  onClose,
-}: SeasonalNotificationProps) {
+export function SeasonalNotification({notification, onClose}: SeasonalNotificationProps) {
   if (!notification) return null
 
   return (
@@ -28,12 +25,7 @@ export function SeasonalNotification({
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
         >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -46,9 +38,7 @@ export function SeasonalNotification({
         {/* Content */}
         <div className="space-y-4">
           {notification.title && (
-            <h2 className="text-2xl font-bold text-brand-500">
-              {notification.title}
-            </h2>
+            <h2 className="text-2xl font-bold text-brand-500">{notification.title}</h2>
           )}
           {notification.subtitle && (
             <h3 className="text-xl text-gray-700">{notification.subtitle}</h3>

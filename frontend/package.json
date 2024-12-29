@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@portabletext/react": "^3.1.0",
+    "@portabletext/react": "^3.2.0",
     "@sanity/image-url": "^1.0.2",
     "lucide": "^0.468.0",
     "lucide-react": "^0.468.0",
