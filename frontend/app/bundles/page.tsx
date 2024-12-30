@@ -13,6 +13,7 @@ export default function BundlesPage() {
         title="Meat Bundles"
         subtitle="Save big with our carefully curated meat bundles"
         imagePath="/images/bundles-hero.jpg"
+        overlay={{opacity: 0.1, color: 'DE4F4F'}}
       />
       <BundleGrid />
     </main>
