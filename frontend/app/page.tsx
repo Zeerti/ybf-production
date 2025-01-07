@@ -41,7 +41,9 @@ export default function HomePage() {
       <HeroBanner
         title="Your Butcher Frank"
         subtitle="Premium Quality Meats & Exceptional Service"
-        imagePath="https://images.unsplash.com/photo-1577412032138-bbf147ceb80b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        imagePath="/images/landing-hero-image.jpg"
+        imagePosition={{x: 'center', y: 'center'}}
+        overlay={{opacity: 0.25, color: '#fff'}}
       />
 
       <div className="container mx-auto px-4 py-8 sm:py-12">
