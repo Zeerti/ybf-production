@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background-image: url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    
+    background-repeat: no-repeat;
+    background-color: rgb(231, 231, 231);
+    background-blend-mode: overlay;
+  }
