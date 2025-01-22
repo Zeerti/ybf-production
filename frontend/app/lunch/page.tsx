@@ -22,7 +22,9 @@ export default async function LunchPage(): Promise<JSX.Element> {
       <HeroBanner
         title="Lunch Menu"
         subtitle="Fresh made sandwiches and daily specials"
-        imagePath="/images/lunch-hero.jpg"
+        imagePath="/images/landing-hero-image.jpg"
+        position={{x: 35, y: 61}}
+        overlay={{opacity: 0.2, color: '#DE4F4F'}}
       />
 
       <div className="container mx-auto px-4 py-8">

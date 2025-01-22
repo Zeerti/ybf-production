@@ -42,8 +42,8 @@ export default function HomePage() {
         title="Your Butcher Frank"
         subtitle="Premium Quality Meats & Exceptional Service"
         imagePath="/images/landing-hero-image.jpg"
-        imagePosition={{x: 'center', y: 'center'}}
-        overlay={{opacity: 0.25, color: '#fff'}}
+        position={{x: 35, y: 61}}
+        overlay={{opacity: 0.2, color: '#DE4F4F'}}
       />
 
       <div className="container mx-auto px-4 py-8 sm:py-12">

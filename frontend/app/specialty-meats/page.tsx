@@ -12,7 +12,9 @@ export default function SpecialtyPage() {
       <HeroBanner
         title="Specialty Meats"
         subtitle="Discover our premium and rare meat selections"
-        imagePath="/images/specialty-hero.jpg"
+        imagePath="/images/landing-hero-image.jpg"
+        position={{x: 35, y: 61}}
+        overlay={{opacity: 0.2, color: '#DE4F4F'}}
       />
       <SpecialtyMeatsTable />
     </main>

@@ -14,7 +14,9 @@ export default function DeliPage() {
       <HeroBanner
         title="Deli & Cheese"
         subtitle="Premium deli meats and artisanal cheeses"
-        imagePath="/images/deli-hero.jpg"
+        imagePath="/images/landing-hero-image.jpg"
+        position={{x: 35, y: 61}}
+        overlay={{opacity: 0.2, color: '#DE4F4F'}}
       />
       <DeliTable />
     </main>
