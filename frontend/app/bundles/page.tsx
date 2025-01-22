@@ -10,10 +10,11 @@ export default function BundlesPage() {
   return (
     <main className="flex-grow">
       <HeroBanner
-        title="Meat Bundles"
-        subtitle="Save big with our carefully curated meat bundles"
-        imagePath="/images/bundles-hero.jpg"
-        overlay={{opacity: 0.1, color: 'DE4F4F'}}
+        title="Your Butcher Frank"
+        subtitle="Premium Quality Meats & Exceptional Service"
+        imagePath="/images/landing-hero-image.jpg"
+        position={{x: 35, y: 61}}
+        overlay={{opacity: 0.2, color: '#DE4F4F'}}
       />
       <BundleGrid />
     </main>

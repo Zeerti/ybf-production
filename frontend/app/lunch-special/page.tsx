@@ -14,7 +14,9 @@ export default function LunchPage() {
       <HeroBanner
         title="Lunch Specials"
         subtitle="Fresh made sandwiches and daily specials"
-        imagePath="/images/lunch-hero.jpg"
+        imagePath="/images/landing-hero-image.jpg"
+        position={{x: 35, y: 61}}
+        overlay={{opacity: 0.2, color: '#DE4F4F'}}
       />
       <div className="py-8">
         <DailySpecial />
