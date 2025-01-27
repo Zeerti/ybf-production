@@ -25,6 +25,7 @@ export const sandwichType = defineType({
               {title: 'White', value: 'white'},
               {title: 'Wheat', value: 'wheat'},
               {title: 'Marbled Rye', value: 'rye'},
+              {title: 'Plain Bagel', value: 'bagel'},
             ],
           },
         },

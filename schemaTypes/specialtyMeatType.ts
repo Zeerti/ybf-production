@@ -24,6 +24,7 @@ export const specialtyMeatType = defineType({
           {title: 'Pork', value: 'pork'},
           {title: 'Beef', value: 'beef'},
           {title: 'Chicken', value: 'chicken'},
+          {title: 'Seafood', value: 'seafood'},
           {title: 'Other', value: 'other'},
         ],
         layout: 'radio',

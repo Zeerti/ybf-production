@@ -415,6 +415,10 @@
               {
                 "type": "string",
                 "value": "rye"
+              },
+              {
+                "type": "string",
+                "value": "bagel"
               }
             ]
           }
@@ -1091,6 +1095,10 @@
             {
               "type": "string",
               "value": "chicken"
+            },
+            {
+              "type": "string",
+              "value": "seafood"
             },
             {
               "type": "string",

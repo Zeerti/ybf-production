@@ -103,7 +103,7 @@ export const LunchMenuContent: React.FC<LunchMenuContentProps> = ({
 
           <div className="mt-6 bg-red-50 p-4 rounded text-sm italic text-black">
             <p>Sandwich orders Tuesday - Friday 8:00am - 5:30pm Saturday 8:00am -5:00 pm</p>
-            <p>(inch size approximate) (non menu items additional charge)</p>
+            <p>(inch size approximate)</p>
           </div>
         </div>
       </div>

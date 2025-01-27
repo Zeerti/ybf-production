@@ -81,7 +81,7 @@ export type Sandwich = {
   _updatedAt: string
   _rev: string
   name?: string
-  availableBreads?: Array<'white' | 'wheat' | 'rye'>
+  availableBreads?: Array<'white' | 'wheat' | 'rye' | 'bagel'>
   ingredients?: Array<string>
   description?: string
 }
@@ -198,7 +198,7 @@ export type SpecialtyMeat = {
   _updatedAt: string
   _rev: string
   name?: string
-  section?: 'lamb' | 'veal' | 'pork' | 'beef' | 'chicken' | 'other'
+  section?: 'lamb' | 'veal' | 'pork' | 'beef' | 'chicken' | 'seafood' | 'other'
   price?: number
   priceUnit?: 'perPound' | 'perPackage' | 'perItem'
   description?: string
@@ -331,7 +331,6 @@ export type FranksOriginalBundle = {
     _type: 'image'
   }
   bundleItems?: Array<string>
-  imageUrl?: string
 }
 
 export type SanityImageCrop = {

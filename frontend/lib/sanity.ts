@@ -241,17 +241,23 @@ export const getLunchMenuData = async (): Promise<LunchMenuData> => {
       description,
       photo {
         asset->{
+          _ref,
           url
-        }
+        },
+        hotspot,
+        crop
       }
     },
     "dailySpecial": *[_type == "dailySpecial"][0] {
       name,
       description,
       photo {
-        asset-> {
+        asset->{
+          _ref,
           url
-        }
+        },
+        hotspot,
+        crop
       }
     }
   }`
