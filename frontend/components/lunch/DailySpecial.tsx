@@ -1,23 +1,20 @@
-import {getImageUrl} from '@/lib/sanity'
-import type {DailySpecial as DailySpecialType} from '@/types/sanity/types'
+import type {SimplifiedSpecial} from '@/types/simplified-specials'
 
 interface DailySpecialProps {
-  dailySpecial: DailySpecialType
+  dailySpecial: SimplifiedSpecial
 }
 
 export function DailySpecial({dailySpecial}: DailySpecialProps) {
   if (!dailySpecial) return null
 
-  const imageUrl = getImageUrl(dailySpecial.photo)
-
   return (
-    <div className="bg-white shadow rounded-lg p-6 h-full">
+    <div className="bg-white/95 rounded-lg shadow-md p-6">
       <h3 className="text-xl font-bold text-red-700 mb-4">Special of the Day</h3>
-      {dailySpecial.photo?.asset?._ref && imageUrl && (
-        <div className="relative aspect-video mb-4">
+      {dailySpecial.photo?.asset?.url && (
+        <div className="relative w-full h-40 mb-4">
           <img
-            src={imageUrl}
-            alt={dailySpecial.name ?? 'Daily Special'}
+            src={dailySpecial.photo.asset.url}
+            alt={dailySpecial.name}
             className="object-cover rounded-lg w-full h-full"
           />
         </div>
