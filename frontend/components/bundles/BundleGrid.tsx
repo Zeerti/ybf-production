@@ -1,7 +1,6 @@
-// components/bundles/BundleGrid.tsx
 import {use} from 'react'
 import {BundleCard} from './BundleCard'
-import {getFranksBundles, getOtherBundles} from '@/lib/sanity'
+import {getFranksBundles, getOtherBundles, getImageUrl} from '@/lib/sanity'
 import type {FranksOriginalBundle, Bundle} from '@/types/sanity/types'
 
 const SectionTitle = ({children}: {children: React.ReactNode}) => (
@@ -31,7 +30,7 @@ export const BundleGrid = () => {
                 title={bundle.name || ''}
                 price={bundle.price ?? 0}
                 items={bundle.bundleItems ?? []}
-                imageUrl={bundle?.imageUrl}
+                imageUrl={bundle.image ? getImageUrl(bundle.image) : undefined}
               />
             ))}
           </div>

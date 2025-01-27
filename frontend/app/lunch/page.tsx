@@ -5,7 +5,6 @@ import {WeeklySpecial} from '@/components/lunch/WeeklySpecial'
 import {DailySpecial} from '@/components/lunch/DailySpecial'
 import {getLunchMenuData} from '../../lib/sanity'
 import type {LunchMenuData} from '../../lib/sanity'
-import {projectId, dataset} from '@/lib/sanity'
 
 export const metadata = {
   title: 'Lunch Menu',
@@ -26,23 +25,29 @@ export default async function LunchPage(): Promise<JSX.Element> {
       />
 
       <div className="container mx-auto px-4 py-8">
-        {/* Specials are shown first on mobile, side by side if there's space */}
-        <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {data.dailySpecial && data.dailySpecial.name && (
-            <DailySpecial dailySpecial={data.dailySpecial} />
-          )}
-          <WeeklySpecial weeklySpecial={data.weeklySpecial} />
-        </div>
+        <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+          {/* Mobile-only specials section */}
+          <div className="lg:hidden mb-8 space-y-4">
+            {data.dailySpecial && <DailySpecial dailySpecial={data.dailySpecial} />}
+            {data.weeklySpecial && <WeeklySpecial weeklySpecial={data.weeklySpecial} />}
+          </div>
 
-        {/* Main lunch menu content */}
-        <div className="space-y-8">
-          <LunchMenuContent
-            sandwiches={data.sandwiches}
-            prices={data.prices}
-            meats={data.meats}
-            cheeses={data.cheeses}
-            condiments={data.condiments}
-          />
+          {/* Main lunch menu content */}
+          <div className="lg:col-span-2 space-y-8">
+            <LunchMenuContent
+              sandwiches={data.sandwiches}
+              prices={data.prices}
+              meats={data.meats}
+              cheeses={data.cheeses}
+              condiments={data.condiments}
+            />
+          </div>
+
+          {/* Desktop-only specials section */}
+          <div className="hidden lg:block space-y-4">
+            {data.dailySpecial && <DailySpecial dailySpecial={data.dailySpecial} />}
+            {data.weeklySpecial && <WeeklySpecial weeklySpecial={data.weeklySpecial} />}
+          </div>
         </div>
       </div>
 

@@ -53,7 +53,7 @@ export const LunchMenuContent: React.FC<LunchMenuContentProps> = ({
   condiments,
 }) => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto py-8">
       <div className="bg-white shadow-lg rounded-lg">
         <div className="p-6">
           <h2 className="text-2xl font-bold text-red-700 mb-6">Lunch Menu</h2>

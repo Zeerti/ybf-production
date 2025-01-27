@@ -41,7 +41,16 @@ export async function getFranksBundles(): Promise<FranksOriginalBundle[]> {
       weight,
       price,
       bundleItems,
-      "imageUrl": image.asset->url
+      image {
+        asset->{
+          _ref,
+          _type,
+          url
+        },
+        hotspot,
+        crop,
+        _type
+      }
     }
   `)
 }
@@ -200,20 +209,29 @@ export type LunchMenuData = {
   cheeses: SandwichCheese[]
   condiments: Condiment[]
   bottomBanner: LunchSpecialBottomBanner
-  weeklySpecial: WeeklySpecial
-  dailySpecial: DailySpecial
+  weeklySpecial: WeeklySpecial | null
+  dailySpecial: DailySpecial | null
 }
 
 export const getLunchMenuData = async (): Promise<LunchMenuData> => {
   const query = `{
     "sandwiches": *[_type == "sandwich"] {
       _id,
+      _type,
+      _createdAt,
+      _updatedAt,
+      _rev,
       name,
       availableBreads,
       ingredients,
       description
     },
     "prices": *[_type == "sandwichPrices"][0] {
+      _id,
+      _type,
+      _createdAt,
+      _updatedAt,
+      _rev,
       fourInchPrice,
       sixInchPrice,
       eightInchPrice,
@@ -233,31 +251,50 @@ export const getLunchMenuData = async (): Promise<LunchMenuData> => {
       name
     },
     "bottomBanner": *[_type == "lunchSpecialBottomBanner"][0] {
+      _id,
+      _type,
+      _createdAt,
+      _updatedAt,
+      _rev,
       header,
       subheader
     },
     "weeklySpecial": *[_type == "weeklySpecial"][0] {
+      _id,
+      _type,
+      _createdAt,
+      _updatedAt,
+      _rev,
       name,
       description,
       photo {
         asset->{
           _ref,
+          _type,
           url
         },
         hotspot,
-        crop
+        crop,
+        _type
       }
     },
     "dailySpecial": *[_type == "dailySpecial"][0] {
+      _id,
+      _type,
+      _createdAt,
+      _updatedAt,
+      _rev,
       name,
       description,
       photo {
         asset->{
           _ref,
+          _type,
           url
         },
         hotspot,
-        crop
+        crop,
+        _type
       }
     }
   }`
