@@ -1,15 +1,7 @@
-import Image from 'next/image'
+import type {SimplifiedSpecial} from '@/types/simplified-specials'
 
 interface DailySpecialProps {
-  dailySpecial: {
-    name?: string
-    description?: string
-    photo?: {
-      asset?: {
-        url?: string
-      }
-    }
-  }
+  dailySpecial: SimplifiedSpecial
 }
 
 export function DailySpecial({dailySpecial}: DailySpecialProps) {

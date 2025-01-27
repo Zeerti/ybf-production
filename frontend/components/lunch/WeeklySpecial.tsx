@@ -1,8 +1,7 @@
-import type {WeeklySpecial as WeeklySpecialType} from '@/types/sanity/types'
-import { getImageUrl } from '@/lib/sanity'
+import type {SimplifiedSpecial} from '@/types/simplified-specials'
 
 interface WeeklySpecialProps {
-  weeklySpecial: WeeklySpecialType | null
+  weeklySpecial: SimplifiedSpecial | null
 }
 
 export const WeeklySpecial: React.FC<WeeklySpecialProps> = ({weeklySpecial}) => {
@@ -15,9 +14,9 @@ export const WeeklySpecial: React.FC<WeeklySpecialProps> = ({weeklySpecial}) => 
   return (
     <div className="bg-white shadow rounded-lg p-6">
       <h3 className="text-xl font-semibold text-red-700 mb-4">Special of the Week</h3>
-      {photo?.asset && (
+      {photo?.asset?.url && (
         <img
-          src={getImageUrl(photo) ?? ''}
+          src={photo.asset.url}
           alt={name ?? 'Special of the Week'}
           className="w-full rounded-lg mb-4"
         />
