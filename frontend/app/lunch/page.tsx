@@ -1,5 +1,3 @@
-// app/lunch/page.tsx
-import {Metadata} from 'next'
 import {HeroBanner} from '../../components/shared/HeroBanner'
 import {LunchMenuContent} from '../../components/lunch/LunchMenuContent'
 import {DailySpecialsFooter} from '@/components/lunch/DailySpecialsFooter'
@@ -7,9 +5,8 @@ import {WeeklySpecial} from '@/components/lunch/WeeklySpecial'
 import {DailySpecial} from '@/components/lunch/DailySpecial'
 import {getLunchMenuData} from '../../lib/sanity'
 import type {LunchMenuData} from '../../lib/sanity'
-import {projectId, dataset} from '@/lib/sanity'
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Lunch Menu',
   description: "Fresh sandwiches and daily specials at Frank's Meat Market",
 }
@@ -28,8 +25,15 @@ export default async function LunchPage(): Promise<JSX.Element> {
       />
 
       <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="flex-grow">
+        <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+          {/* Mobile-only specials section */}
+          <div className="lg:hidden mb-8 space-y-4">
+            {data.dailySpecial && <DailySpecial dailySpecial={data.dailySpecial} />}
+            {data.weeklySpecial && <WeeklySpecial weeklySpecial={data.weeklySpecial} />}
+          </div>
+
+          {/* Main lunch menu content */}
+          <div className="lg:col-span-2 space-y-8">
             <LunchMenuContent
               sandwiches={data.sandwiches}
               prices={data.prices}
@@ -39,26 +43,10 @@ export default async function LunchPage(): Promise<JSX.Element> {
             />
           </div>
 
-          <div className="lg:w-80 space-y-8">
-            {data.dailySpecial && data.dailySpecial.name && (
-              <DailySpecial
-                dailySpecial={{
-                  ...data.dailySpecial,
-                  photo: data.dailySpecial.photo
-                    ? {
-                        asset: {
-                          url: data.dailySpecial?.photo?.asset?._ref
-                            ? `https://cdn.sanity.io/images/${projectId}/${dataset}/${data.dailySpecial.photo.asset._ref
-                                .replace('image-', '')
-                                .replace('-jpg', '.jpg')}`
-                            : undefined,
-                        },
-                      }
-                    : undefined,
-                }}
-              />
-            )}
-            <WeeklySpecial weeklySpecial={data.weeklySpecial} />
+          {/* Desktop-only specials section */}
+          <div className="hidden lg:block space-y-4">
+            {data.dailySpecial && <DailySpecial dailySpecial={data.dailySpecial} />}
+            {data.weeklySpecial && <WeeklySpecial weeklySpecial={data.weeklySpecial} />}
           </div>
         </div>
       </div>

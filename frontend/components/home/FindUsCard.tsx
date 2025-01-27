@@ -4,7 +4,7 @@ export function FindUsCard() {
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden border-2 border-transparent hover:border-brand-500 transition-all duration-300 hover:shadow-xl h-full">
       <div className="p-8 flex flex-col h-full">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 space-y-2 sm:space-y-0">
           <h2 className="text-3xl font-bold text-brand-500">Find Us</h2>
           <p className="text-lg text-gray-800">900 Coffman St. Longmont, CO 80501</p>
         </div>
@@ -23,5 +23,4 @@ export function FindUsCard() {
     </div>
   )
 }
-
 export default FindUsCard
