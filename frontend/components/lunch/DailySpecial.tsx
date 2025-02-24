@@ -1,11 +1,12 @@
+// Fix for DailySpecial.tsx
 import type {SimplifiedSpecial} from '@/types/simplified-specials'
 
 interface DailySpecialProps {
-  dailySpecial: SimplifiedSpecial
+  dailySpecial: SimplifiedSpecial | null
 }
 
 export function DailySpecial({dailySpecial}: DailySpecialProps) {
-  if (!dailySpecial) return null
+  if (!dailySpecial || !dailySpecial.name) return null
 
   return (
     <div className="bg-white/95 rounded-lg shadow-md p-6">
@@ -14,7 +15,7 @@ export function DailySpecial({dailySpecial}: DailySpecialProps) {
         <div className="relative w-full h-40 mb-4">
           <img
             src={dailySpecial.photo.asset.url}
-            alt={dailySpecial.name}
+            alt={dailySpecial.name || 'Daily Special'}
             className="object-cover rounded-lg w-full h-full"
           />
         </div>

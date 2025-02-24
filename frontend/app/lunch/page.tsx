@@ -11,8 +11,14 @@ export const metadata = {
   description: "Fresh sandwiches and daily specials at Frank's Meat Market",
 }
 
+// Updated version of the LunchPage component
 export default async function LunchPage(): Promise<JSX.Element> {
   const data: LunchMenuData = await getLunchMenuData()
+
+  // Check if we have any specials to display
+  const hasSpecials =
+    (data.dailySpecial && Object.keys(data.dailySpecial).length > 0) ||
+    (data.weeklySpecial && Object.keys(data.weeklySpecial).length > 0)
 
   return (
     <main className="flex-grow pb-24">
@@ -25,33 +31,57 @@ export default async function LunchPage(): Promise<JSX.Element> {
       />
 
       <div className="container mx-auto px-4 py-8">
-        <div className="lg:grid lg:grid-cols-3 lg:gap-8">
-          {/* Mobile-only specials section */}
-          <div className="lg:hidden mb-8 space-y-4">
-            {data.dailySpecial && <DailySpecial dailySpecial={data.dailySpecial} />}
-            {data.weeklySpecial && <WeeklySpecial weeklySpecial={data.weeklySpecial} />}
-          </div>
+        {/* If we have specials, use the three-column layout on large screens */}
+        {hasSpecials ? (
+          <div className="lg:grid lg:grid-cols-3 lg:gap-8">
+            {/* Mobile-only specials section */}
+            <div className="lg:hidden mb-8 space-y-4">
+              {data.dailySpecial && Object.keys(data.dailySpecial).length > 0 && (
+                <DailySpecial dailySpecial={data.dailySpecial} />
+              )}
+              {data.weeklySpecial && Object.keys(data.weeklySpecial).length > 0 && (
+                <WeeklySpecial weeklySpecial={data.weeklySpecial} />
+              )}
+            </div>
 
-          {/* Main lunch menu content */}
-          <div className="lg:col-span-2 space-y-8">
+            {/* Main lunch menu content */}
+            <div className="lg:col-span-2 space-y-8">
+              <LunchMenuContent
+                sandwiches={data.sandwiches || []}
+                prices={data.prices || {}}
+                meats={data.meats || []}
+                cheeses={data.cheeses || []}
+                condiments={data.condiments || []}
+              />
+            </div>
+
+            {/* Desktop-only specials section */}
+            <div className="hidden lg:block space-y-4">
+              {data.dailySpecial && Object.keys(data.dailySpecial).length > 0 && (
+                <DailySpecial dailySpecial={data.dailySpecial} />
+              )}
+              {data.weeklySpecial && Object.keys(data.weeklySpecial).length > 0 && (
+                <WeeklySpecial weeklySpecial={data.weeklySpecial} />
+              )}
+            </div>
+          </div>
+        ) : (
+          /* If no specials, use a centered layout */
+          <div className="max-w-3xl mx-auto">
             <LunchMenuContent
-              sandwiches={data.sandwiches}
-              prices={data.prices}
-              meats={data.meats}
-              cheeses={data.cheeses}
-              condiments={data.condiments}
+              sandwiches={data.sandwiches || []}
+              prices={data.prices || {}}
+              meats={data.meats || []}
+              cheeses={data.cheeses || []}
+              condiments={data.condiments || []}
             />
           </div>
-
-          {/* Desktop-only specials section */}
-          <div className="hidden lg:block space-y-4">
-            {data.dailySpecial && <DailySpecial dailySpecial={data.dailySpecial} />}
-            {data.weeklySpecial && <WeeklySpecial weeklySpecial={data.weeklySpecial} />}
-          </div>
-        </div>
+        )}
       </div>
 
-      <DailySpecialsFooter banner={data.bottomBanner} />
+      {data.bottomBanner && data.bottomBanner.header && (
+        <DailySpecialsFooter banner={data.bottomBanner} />
+      )}
     </main>
   )
 }
