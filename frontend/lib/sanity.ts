@@ -224,6 +224,14 @@ export type LunchMenuData = {
 }
 
 export const getLunchMenuData = async (): Promise<LunchMenuData> => {
+  // Create a fresh client for this specific query to ensure no caching
+  const freshClient = createClient({
+    projectId,
+    dataset,
+    apiVersion: '2024-03-05',
+    useCdn: false, // Disable CDN to get fresh data
+  })
+
   const query = `{
     "sandwiches": *[_type == "sandwich"] {
       _id,
@@ -275,7 +283,9 @@ export const getLunchMenuData = async (): Promise<LunchMenuData> => {
     }
   }`
 
-  return client.fetch<LunchMenuData>(query)
+  // Add a cache-busting parameter to ensure fresh data
+  const timestamp = new Date().getTime()
+  return freshClient.fetch<LunchMenuData>(`${query}`, {}, { cache: 'no-store', next: { revalidate: 0 } })
 }
 
 // Export the client for use in other parts of the application

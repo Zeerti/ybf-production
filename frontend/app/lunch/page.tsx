@@ -11,6 +11,10 @@ export const metadata = {
   description: "Fresh sandwiches and daily specials at Frank's Meat Market",
 }
 
+// Disable Next.js cache for this route
+export const revalidate = 1800;
+export const dynamic = 'force-dynamic';
+
 // Updated version of the LunchPage component
 export default async function LunchPage(): Promise<JSX.Element> {
   const data: LunchMenuData = await getLunchMenuData()
