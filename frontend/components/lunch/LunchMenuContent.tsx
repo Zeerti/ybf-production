@@ -23,57 +23,49 @@ const MenuItem: React.FC<MenuItemProps> = ({title, price, children}) => (
   </div>
 )
 
-// Updated to handle color-coding by category
+// Updated to handle sections with borders
 const CondimentsList: React.FC<{condiments: Condiment[]}> = ({condiments}) => {
   // Create arrays for each category
-  const condimentsInCategory = condiments
+  const condimentsItems = condiments
     .filter(c => c.category === 'condiments')
-    .map(c => ({ name: c.name || '', category: 'condiments' }));
+    .map(c => c.name || '');
     
-  const vegetablesInCategory = condiments
+  const vegetablesItems = condiments
     .filter(c => c.category === 'vegetables')
-    .map(c => ({ name: c.name || '', category: 'vegetables' }));
+    .map(c => c.name || '');
     
-  const peppersInCategory = condiments
+  const peppersItems = condiments
     .filter(c => c.category === 'peppers')
-    .map(c => ({ name: c.name || '', category: 'peppers' }));
+    .map(c => c.name || '');
     
-  const othersInCategory = condiments
+  const otherItems = condiments
     .filter(c => c.category === 'other' || !c.category)
-    .map(c => ({ name: c.name || '', category: 'other' }));
+    .map(c => c.name || '');
   
-  // Combine all categories in the specific order we want
-  const orderedCondiments = [
-    ...condimentsInCategory,
-    ...vegetablesInCategory,
-    ...peppersInCategory,
-    ...othersInCategory
-  ];
-
-  // Define subtle background colors for each category
-  const getCategoryColor = (category: string): string => {
-    switch(category) {
-      case 'condiments':
-        return 'border-l-2 border-l-yellow-200 pl-2';
-      case 'vegetables':
-        return 'border-l-2 border-l-green-200 pl-2';
-      case 'peppers':
-        return 'border-l-2 border-l-red-200 pl-2';
-      case 'other':
-        return 'border-l-2 border-l-gray-200 pl-2';
-      default:
-        return '';
-    }
+  // Create sections for each category
+  const createSection = (items: string[], borderColor: string) => {
+    if (items.length === 0) return null;
+    
+    return (
+      <div className={`border border-${borderColor}-100 rounded-md p-2 mb-3`}>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          {items.map((item, index) => (
+            <li key={index} className="text-gray-700">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
   };
   
   return (
-    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-      {orderedCondiments.map((item, index) => (
-        <li key={index} className={`text-gray-700 ${getCategoryColor(item.category)}`}>
-          {item.name}
-        </li>
-      ))}
-    </ul>
+    <div>
+      {createSection(condimentsItems, 'yellow')}
+      {createSection(vegetablesItems, 'green')}
+      {createSection(peppersItems, 'red')}
+      {createSection(otherItems, 'gray')}
+    </div>
   );
 };
 
