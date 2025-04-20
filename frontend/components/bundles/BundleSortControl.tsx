@@ -6,6 +6,11 @@ import { BundleCard } from './BundleCard'
 import type { FranksOriginalBundle, Bundle } from '@/types/sanity/types'
 import { getImageUrl } from '@/lib/sanity'
 
+// Type guard to check if a bundle has a name (is a FranksOriginalBundle)
+function isFranksBundle(bundle: FranksOriginalBundle | Bundle): bundle is FranksOriginalBundle {
+  return 'name' in bundle;
+}
+
 type SortOption = 'none' | 'highToLow' | 'lowToHigh'
 
 interface BundleSortControlProps {
@@ -41,7 +46,7 @@ export default function BundleSortControl({
             onChange={(e) => setSortOption(e.target.value as SortOption)}
             className="bg-white border border-surface-200 text-surface-700 py-2 pl-4 pr-10 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
-            <option value="none">Sort By: None</option>
+            <option value="none">Sort By</option>
             <option value="highToLow">Price: High to Low</option>
             <option value="lowToHigh">Price: Low to High</option>
           </select>
@@ -52,15 +57,29 @@ export default function BundleSortControl({
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {sortedBundles.map((bundle) => (
-          <BundleCard
-            key={bundle._id}
-            title={unnamed ? `${bundle.weight}lb Bundle` : (bundle.name || '')}
-            price={bundle.price ?? 0}
-            items={bundle.bundleItems ?? []}
-            imageUrl={!unnamed && 'image' in bundle && bundle.image ? getImageUrl(bundle.image) : undefined}
-          />
-        ))}
+        {sortedBundles.map((bundle) => {
+          // Determine the title based on bundle type and unnamed flag
+          let title = '';
+          if (unnamed && bundle.weight) {
+            title = `${bundle.weight}lb Bundle`;
+          } else if ('name' in bundle && bundle.name) {
+            title = bundle.name;
+          } else if (bundle.weight) {
+            title = `${bundle.weight}lb Bundle`;
+          }
+
+          const hasImage = !unnamed && 'image' in bundle && bundle.image;
+          
+          return (
+            <BundleCard
+              key={bundle._id}
+              title={title}
+              price={bundle.price ?? 0}
+              items={bundle.bundleItems ?? []}
+              imageUrl={hasImage ? getImageUrl(bundle.image) : undefined}
+            />
+          );
+        })}
       </div>
     </section>
   )
