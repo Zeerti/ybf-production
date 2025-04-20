@@ -15,6 +15,7 @@ import {lunchSpecialBottomBannerType} from './lunchSpecialBottomBannerType'
 import {sandwichPricesType} from './sandwichPriceType'
 import {dailySpecialType} from './dailySpecialType'
 import {weeklySpecialType} from './weeklySpecialType'
+import {pdfDocumentType} from './pdfDocumentType'
 
 export const schemaTypes = [
   franksOriginalBundlesType,
@@ -34,4 +35,5 @@ export const schemaTypes = [
   sandwichMeatType,
   sandwichPricesType,
   sandwichType,
+  pdfDocumentType
 ]
