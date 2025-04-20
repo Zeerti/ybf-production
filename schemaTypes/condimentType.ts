@@ -8,17 +8,45 @@ export const condimentType = defineType({
     defineField({
       name: 'name',
       type: 'string',
+      title: 'Name',
+      validation: (rule) => rule.required().error('A name is required'),
+    }),
+    defineField({
+      name: 'category',
+      type: 'string',
+      title: 'Category',
+      description: 'Select which category this condiment belongs to',
+      options: {
+        list: [
+          {title: 'Condiments', value: 'condiments'},
+          {title: 'Vegetables', value: 'vegetables'},
+          {title: 'Peppers', value: 'peppers'},
+          {title: 'Other', value: 'other'},
+        ],
+        layout: 'radio',
+      },
+      validation: (rule) => rule.required().error('You must select a category'),
     }),
   ],
   preview: {
     select: {
-      name: 'name',
+      title: 'name',
+      category: 'category',
     },
     prepare(selection) {
-      const {name} = selection
+      const {title, category} = selection
+      const categoryMap = {
+        condiments: '🧂 Condiment',
+        vegetables: '🥬 Vegetable',
+        peppers: '🌶️ Pepper',
+        other: '⚪ Other',
+      }
+      
+      const categoryDisplay = category ? (categoryMap[category] || 'Unknown') : 'Uncategorized'
 
       return {
-        title: `${name}`,
+        title: title || 'Unnamed Condiment',
+        subtitle: categoryDisplay,
       }
     },
   },

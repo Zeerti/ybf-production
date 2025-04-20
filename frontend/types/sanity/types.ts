@@ -200,6 +200,7 @@ export type Condiment = {
   _updatedAt: string
   _rev: string
   name?: string
+  category?: 'condiments' | 'vegetables' | 'peppers' | 'other'
 }
 
 export type GameMeat = {

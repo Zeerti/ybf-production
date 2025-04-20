@@ -256,9 +256,10 @@ export const getLunchMenuData = async (): Promise<LunchMenuData> => {
       name
     },
     "condiments": *[_type == "condiment"] {
-      _id,
-      name
-    },
+  _id,
+  name,
+  category
+},
     "bottomBanner": *[_type == "lunchSpecialBottomBanner"][0] {
       header,
       subheader

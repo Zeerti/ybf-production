@@ -23,11 +23,62 @@ const MenuItem: React.FC<MenuItemProps> = ({title, price, children}) => (
   </div>
 )
 
-interface OptionsListProps {
-  items: string[]
-}
+// Updated to handle color-coding by category
+const CondimentsList: React.FC<{condiments: Condiment[]}> = ({condiments}) => {
+  // Create arrays for each category
+  const condimentsInCategory = condiments
+    .filter(c => c.category === 'condiments')
+    .map(c => ({ name: c.name || '', category: 'condiments' }));
+    
+  const vegetablesInCategory = condiments
+    .filter(c => c.category === 'vegetables')
+    .map(c => ({ name: c.name || '', category: 'vegetables' }));
+    
+  const peppersInCategory = condiments
+    .filter(c => c.category === 'peppers')
+    .map(c => ({ name: c.name || '', category: 'peppers' }));
+    
+  const othersInCategory = condiments
+    .filter(c => c.category === 'other' || !c.category)
+    .map(c => ({ name: c.name || '', category: 'other' }));
+  
+  // Combine all categories in the specific order we want
+  const orderedCondiments = [
+    ...condimentsInCategory,
+    ...vegetablesInCategory,
+    ...peppersInCategory,
+    ...othersInCategory
+  ];
 
-const OptionsList: React.FC<OptionsListProps> = ({items}) => (
+  // Define subtle background colors for each category
+  const getCategoryColor = (category: string): string => {
+    switch(category) {
+      case 'condiments':
+        return 'border-l-2 border-l-yellow-200 pl-2';
+      case 'vegetables':
+        return 'border-l-2 border-l-green-200 pl-2';
+      case 'peppers':
+        return 'border-l-2 border-l-red-200 pl-2';
+      case 'other':
+        return 'border-l-2 border-l-gray-200 pl-2';
+      default:
+        return '';
+    }
+  };
+  
+  return (
+    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      {orderedCondiments.map((item, index) => (
+        <li key={index} className={`text-gray-700 ${getCategoryColor(item.category)}`}>
+          {item.name}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+// Standard options list for other sections
+const OptionsList: React.FC<{items: string[]}> = ({items}) => (
   <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
     {items.map((item, index) => (
       <li key={index} className="text-gray-700">
@@ -35,7 +86,7 @@ const OptionsList: React.FC<OptionsListProps> = ({items}) => (
       </li>
     ))}
   </ul>
-)
+);
 
 interface LunchMenuContentProps {
   sandwiches: Sandwich[]
@@ -83,8 +134,8 @@ export const LunchMenuContent: React.FC<LunchMenuContentProps> = ({
             <OptionsList items={cheeses.map((cheese) => cheese.name ?? '')} />
           </MenuItem>
 
-          <MenuItem title="Condiments">
-            <OptionsList items={condiments.map((condiment) => condiment.name ?? '')} />
+          <MenuItem title="Toppings & Condiments">
+            <CondimentsList condiments={condiments} />
           </MenuItem>
 
           {sandwiches.map((sandwich) => (
