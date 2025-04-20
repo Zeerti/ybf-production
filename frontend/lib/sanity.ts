@@ -288,5 +288,18 @@ export const getLunchMenuData = async (): Promise<LunchMenuData> => {
   return freshClient.fetch<LunchMenuData>(`${query}`, {}, { cache: 'no-store', next: { revalidate: 0 } })
 }
 
+export async function getBundlePdf() {
+  return client.fetch(`
+    *[_type == "pdfDocument" && _id == "menuPdf"][0] {
+      _id,
+      title,
+      description,
+      "pdfUrl": pdfFile.asset->url,
+      lastUpdated,
+      displayOnWebsite
+    }
+  `)
+}
+
 // Export the client for use in other parts of the application
 export {client as sanityClient}

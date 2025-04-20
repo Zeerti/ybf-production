@@ -85,6 +85,7 @@ export default function HomePage() {
                 <li>Whole Milk</li>
                 <li>2% Milk</li>
                 <li>Fat Free Milk</li>
+                <li>Chocolate Milk</li>
                 <li>Half and Half</li>
                 <li>Heavy Cream</li>
                 <li>Eggnog (Seasonally)</li>
