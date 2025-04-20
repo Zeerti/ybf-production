@@ -39,6 +39,41 @@ export type SanityImageDimensions = {
   aspectRatio?: number
 }
 
+export type Geopoint = {
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
+}
+
+export type Slug = {
+  _type: 'slug'
+  current?: string
+  source?: string
+}
+
+export type PdfDocument = {
+  _id: string
+  _type: 'pdfDocument'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  description?: string
+  pdfFile?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+    }
+    media?: unknown
+    _type: 'file'
+  }
+  lastUpdated?: string
+  displayOnWebsite?: boolean
+}
+
 export type SanityFileAsset = {
   _id: string
   _type: 'sanity.fileAsset'
@@ -59,19 +94,6 @@ export type SanityFileAsset = {
   path?: string
   url?: string
   source?: SanityAssetSourceData
-}
-
-export type Geopoint = {
-  _type: 'geopoint'
-  lat?: number
-  lng?: number
-  alt?: number
-}
-
-export type Slug = {
-  _type: 'slug'
-  current?: string
-  source?: string
 }
 
 export type Sandwich = {
@@ -140,6 +162,7 @@ export type WeeklySpecial = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
@@ -161,6 +184,7 @@ export type DailySpecial = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
@@ -209,6 +233,7 @@ export type SpecialtyMeat = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
@@ -259,6 +284,7 @@ export type HomePageNavCard = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
@@ -326,6 +352,7 @@ export type FranksOriginalBundle = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
+    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
@@ -394,9 +421,10 @@ export type AllSanitySchemaTypes =
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
-  | SanityFileAsset
   | Geopoint
   | Slug
+  | PdfDocument
+  | SanityFileAsset
   | Sandwich
   | SandwichPrices
   | SandwichMeat
