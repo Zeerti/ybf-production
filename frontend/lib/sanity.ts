@@ -256,9 +256,10 @@ export const getLunchMenuData = async (): Promise<LunchMenuData> => {
       name
     },
     "condiments": *[_type == "condiment"] {
-      _id,
-      name
-    },
+  _id,
+  name,
+  category
+},
     "bottomBanner": *[_type == "lunchSpecialBottomBanner"][0] {
       header,
       subheader
@@ -286,6 +287,19 @@ export const getLunchMenuData = async (): Promise<LunchMenuData> => {
   // Add a cache-busting parameter to ensure fresh data
   const timestamp = new Date().getTime()
   return freshClient.fetch<LunchMenuData>(`${query}`, {}, { cache: 'no-store', next: { revalidate: 0 } })
+}
+
+export async function getBundlePdf() {
+  return client.fetch(`
+    *[_type == "pdfDocument" && _id == "menuPdf"][0] {
+      _id,
+      title,
+      description,
+      "pdfUrl": pdfFile.asset->url,
+      lastUpdated,
+      displayOnWebsite
+    }
+  `)
 }
 
 // Export the client for use in other parts of the application

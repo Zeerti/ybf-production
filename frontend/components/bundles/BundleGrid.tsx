@@ -1,24 +1,43 @@
-import {use} from 'react'
-import {BundleCard} from './BundleCard'
-import {getFranksBundles, getOtherBundles, getImageUrl} from '@/lib/sanity'
-import type {FranksOriginalBundle, Bundle} from '@/types/sanity/types'
+import { use } from 'react'
+import { BundleCard } from './BundleCard'
+import BundlePdfDownload from './BundlePdfDownload'
+import BundleSortControl from './BundleSortControl'
+import { 
+  getFranksBundles, 
+  getOtherBundles, 
+  getImageUrl, 
+  getBundlePdf 
+} from '@/lib/sanity'
+import type { FranksOriginalBundle, Bundle } from '@/types/sanity/types'
 
 const SectionTitle = ({children}: {children: React.ReactNode}) => (
   <h2 className="text-2xl font-bold mb-6 text-brand-900">{children}</h2>
 )
 
-export const BundleGrid = () => {
+export default function BundleGrid() {
+  // Fetch data with server components
   const franksBundles = use(getFranksBundles())
   const otherBundles = use(getOtherBundles())
+  const bundlePdf = use(getBundlePdf() || null)
 
   // Filter Frank's Original Bundles to only include ones with names
   const namedBundles = franksBundles.filter((bundle) => bundle.name)
+  
   // Filter the rest into other bundles
   const unnamedFranksBundles = franksBundles.filter((bundle) => !bundle.name)
   const allOtherBundles = [...unnamedFranksBundles, ...otherBundles]
 
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* PDF Download Section */}
+      {bundlePdf && bundlePdf.displayOnWebsite && bundlePdf.pdfUrl && (
+        <BundlePdfDownload 
+          pdfUrl={bundlePdf.pdfUrl} 
+          title={bundlePdf.title} 
+          lastUpdated={bundlePdf.lastUpdated}
+        />
+      )}
+      
       {/* Frank's Original Bundles Section */}
       {namedBundles.length > 0 && (
         <section className="mb-16">
@@ -37,21 +56,13 @@ export const BundleGrid = () => {
         </section>
       )}
 
-      {/* Other Bundles Section */}
+      {/* Other Bundles Section with client-side sorting */}
       {allOtherBundles.length > 0 && (
-        <section>
-          <SectionTitle>Other Bundles</SectionTitle>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {allOtherBundles.map((bundle) => (
-              <BundleCard
-                key={bundle._id}
-                title={`${bundle.weight}lb Bundle`}
-                price={bundle.price ?? 0}
-                items={bundle.bundleItems ?? []}
-              />
-            ))}
-          </div>
-        </section>
+        <BundleSortControl 
+          title="Other Bundles" 
+          bundles={allOtherBundles} 
+          unnamed={true} 
+        />
       )}
 
       {/* Show message if no bundles are available */}

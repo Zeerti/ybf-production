@@ -1,5 +1,5 @@
 import {HeroBanner} from '../../components/shared/HeroBanner'
-import {BundleGrid} from '../../components/bundles/BundleGrid'
+import BundleGrid from '../../components/bundles/BundleGrid'
 
 export const metadata = {
   title: 'Meat Bundles',

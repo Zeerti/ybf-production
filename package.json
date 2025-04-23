@@ -10,7 +10,7 @@
     "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
-    "generate-types": "pnpm dlx sanity@latest typegen generate"
+    "generate-types": "pnpm dlx sanity@latest schema extract && pnpm dlx sanity@latest typegen generate"
   },
   "keywords": [
     "sanity"

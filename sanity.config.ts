@@ -119,6 +119,14 @@ const structureToolOptions = {
                   .child(S.documentTypeList('gameMeat').title('Game Meats')),
               ]),
           ),
+          S.listItem()
+          .title('Bundles PDF')
+          .child(
+            S.editor()
+              .id('pdfDocument')
+              .schemaType('pdfDocument')
+              .documentId('menuPdf') // Fixed document ID for the singleton
+          ),
       ]),
 }
 

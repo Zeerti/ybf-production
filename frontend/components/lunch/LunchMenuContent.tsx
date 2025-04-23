@@ -23,11 +23,54 @@ const MenuItem: React.FC<MenuItemProps> = ({title, price, children}) => (
   </div>
 )
 
-interface OptionsListProps {
-  items: string[]
-}
+// Updated to handle sections with borders
+const CondimentsList: React.FC<{condiments: Condiment[]}> = ({condiments}) => {
+  // Create arrays for each category
+  const condimentsItems = condiments
+    .filter(c => c.category === 'condiments')
+    .map(c => c.name || '');
+    
+  const vegetablesItems = condiments
+    .filter(c => c.category === 'vegetables')
+    .map(c => c.name || '');
+    
+  const peppersItems = condiments
+    .filter(c => c.category === 'peppers')
+    .map(c => c.name || '');
+    
+  const otherItems = condiments
+    .filter(c => c.category === 'other' || !c.category)
+    .map(c => c.name || '');
+  
+  // Create sections for each category
+  const createSection = (items: string[], borderColor: string) => {
+    if (items.length === 0) return null;
+    
+    return (
+      <div className={`border border-${borderColor}-100 rounded-md p-2 mb-3`}>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+          {items.map((item, index) => (
+            <li key={index} className="text-gray-700">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+  
+  return (
+    <div>
+      {createSection(condimentsItems, 'yellow')}
+      {createSection(vegetablesItems, 'green')}
+      {createSection(peppersItems, 'red')}
+      {createSection(otherItems, 'gray')}
+    </div>
+  );
+};
 
-const OptionsList: React.FC<OptionsListProps> = ({items}) => (
+// Standard options list for other sections
+const OptionsList: React.FC<{items: string[]}> = ({items}) => (
   <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
     {items.map((item, index) => (
       <li key={index} className="text-gray-700">
@@ -35,7 +78,7 @@ const OptionsList: React.FC<OptionsListProps> = ({items}) => (
       </li>
     ))}
   </ul>
-)
+);
 
 interface LunchMenuContentProps {
   sandwiches: Sandwich[]
@@ -83,8 +126,8 @@ export const LunchMenuContent: React.FC<LunchMenuContentProps> = ({
             <OptionsList items={cheeses.map((cheese) => cheese.name ?? '')} />
           </MenuItem>
 
-          <MenuItem title="Condiments">
-            <OptionsList items={condiments.map((condiment) => condiment.name ?? '')} />
+          <MenuItem title="Toppings & Condiments">
+            <CondimentsList condiments={condiments} />
           </MenuItem>
 
           {sandwiches.map((sandwich) => (
