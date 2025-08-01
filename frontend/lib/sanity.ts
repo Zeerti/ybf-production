@@ -30,7 +30,14 @@ export const client = createClient({
 const builder = imageUrlBuilder(client)
 
 export async function getFranksBundles(): Promise<FranksOriginalBundle[]> {
-  return client.fetch(`
+  const freshClient = createClient({
+    projectId,
+    dataset,
+    apiVersion: '2024-03-05',
+    useCdn: false, // Disable CDN to get fresh data
+  })
+  return freshClient.fetch(
+    `
     *[_type == "franksOriginalBundle"] {
       _id,
       _type,
@@ -52,11 +59,21 @@ export async function getFranksBundles(): Promise<FranksOriginalBundle[]> {
         _type
       }
     }
-  `)
+  `,
+    {},
+    {cache: 'no-store', next: {revalidate: 0}},
+  )
 }
 
 export async function getOtherBundles(): Promise<Bundle[]> {
-  return client.fetch(`
+  const freshClient = createClient({
+    projectId,
+    dataset,
+    apiVersion: '2024-03-05',
+    useCdn: false, // Disable CDN to get fresh data
+  })
+  return freshClient.fetch(
+    `
     *[_type == "bundle"] {
       _id,
       _type,
@@ -67,7 +84,10 @@ export async function getOtherBundles(): Promise<Bundle[]> {
       price,
       bundleItems
     }
-  `)
+  `,
+    {},
+    {cache: 'no-store', next: {revalidate: 0}},
+  )
 }
 
 // Safe utility function to get the Sanity image URL
@@ -297,6 +317,7 @@ export async function getBundlePdf() {
       description,
       "pdfUrl": pdfFile.asset->url,
       lastUpdated,
+      _updatedAt,
       displayOnWebsite
     }
   `)

@@ -31,10 +31,10 @@ export default function BundleGrid() {
     <div className="container mx-auto px-4 py-8">
       {/* PDF Download Section */}
       {bundlePdf && bundlePdf.displayOnWebsite && bundlePdf.pdfUrl && (
-        <BundlePdfDownload 
-          pdfUrl={bundlePdf.pdfUrl} 
-          title={bundlePdf.title} 
-          lastUpdated={bundlePdf.lastUpdated}
+        <BundlePdfDownload
+          pdfUrl={bundlePdf.pdfUrl}
+          title={bundlePdf.title}
+          _updatedAt={bundlePdf._updatedAt}
         />
       )}
       

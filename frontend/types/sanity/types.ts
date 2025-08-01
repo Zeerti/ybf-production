@@ -67,7 +67,6 @@ export type PdfDocument = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
     }
-    media?: unknown
     _type: 'file'
   }
   lastUpdated?: string
@@ -162,7 +161,6 @@ export type WeeklySpecial = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
-    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
@@ -184,7 +182,6 @@ export type DailySpecial = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
-    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
@@ -234,7 +231,6 @@ export type SpecialtyMeat = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
-    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
@@ -285,7 +281,6 @@ export type HomePageNavCard = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
-    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
@@ -353,7 +348,6 @@ export type FranksOriginalBundle = {
       _weak?: boolean
       [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
     }
-    media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
     _type: 'image'
