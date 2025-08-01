@@ -1,27 +1,30 @@
-import React from 'react';
-import { FileDown } from 'lucide-react';
+import React from 'react'
+import {FileDown} from 'lucide-react'
 
 interface BundlePdfDownloadProps {
-  pdfUrl?: string;
-  title?: string;
-  lastUpdated?: string;
+  pdfUrl?: string
+  title?: string
+  lastUpdated?: string
+  _updatedAt?: string
 }
 
-export default function BundlePdfDownload({ 
-  pdfUrl, 
-  title = 'Bundle Flyer', 
-  lastUpdated 
+export default function BundlePdfDownload({
+  pdfUrl,
+  title = 'Bundle Flyer',
+  _updatedAt,
 }: BundlePdfDownloadProps) {
   // If there's no URL, don't render anything
   if (!pdfUrl) {
-    return null;
+    return null
   }
 
-  const formattedDate = lastUpdated ? new Date(lastUpdated).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  }) : '';
+  const formattedDate = _updatedAt
+    ? new Date(_updatedAt).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    : ''
 
   return (
     <div className="w-full bg-white shadow-md rounded-lg p-6 mb-8 border-2 border-transparent hover:border-brand-100 transition-colors">
@@ -29,12 +32,12 @@ export default function BundlePdfDownload({
         <div className="mb-4 sm:mb-0">
           <h3 className="text-xl font-semibold text-brand-700 mb-1">{title}</h3>
           {formattedDate && (
-            <p className="text-sm text-surface-500">Updated: {formattedDate}</p>
+            <p className="text-sm text-surface-500">Last Updated: {formattedDate}</p>
           )}
         </div>
-        
-        <a 
-          href={pdfUrl} 
+
+        <a
+          href={pdfUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center px-6 py-3 bg-brand-500 text-white rounded-lg hover:bg-brand-600 transition-colors"
@@ -44,5 +47,5 @@ export default function BundlePdfDownload({
         </a>
       </div>
     </div>
-  );
-};
+  )
+}

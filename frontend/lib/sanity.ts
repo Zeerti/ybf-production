@@ -317,6 +317,7 @@ export async function getBundlePdf() {
       description,
       "pdfUrl": pdfFile.asset->url,
       lastUpdated,
+      _updatedAt,
       displayOnWebsite
     }
   `)
